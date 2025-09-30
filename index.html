@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Future Stars — We Learn, We Grow, We Shine</title>
+
+<style>
+:root {
+--pink:#ff4081; --pink-700:#e73370; --bg:#ffe6f0;
+--card:#fff; --text:#222; --muted:#666;
+--shadow:0 8px 20px rgba(0,0,0,.08); --radius:12px;
+}
+body { font-family:Arial, sans-serif; margin:0; background:var(--bg); color:var(--text);}
+header {position:sticky;top:0;z-index:100;background:#fff;box-shadow:var(--shadow);}
+.wrap {max-width:1100px;margin:0 auto;padding:0 16px;}
+.header-row {display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;}
+.brand h1{margin:0;font-size:1.6rem;color:var(--pink);} .brand h1::before{content:"⭐ ";}
+nav{display:flex;flex-wrap:wrap;gap:8px;}
+nav a,.btn{background:var(--pink);color:#fff;padding:.55rem .9rem;border-radius:10px;border:none;cursor:pointer;font-weight:600;}
+nav a:hover,.btn:hover{background:var(--pink-700);}
+section{padding:2rem 0;}
+.hero{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;}
+.hero img{width:100%;max-width:520px;border-radius:var(--radius);box-shadow:var(--shadow);}
+.card{background:#fff;border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);}
+#services .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;padding:6vh 12px;}
+.modal-content{background:#fff;margin:0 auto;max-width:960px;border-radius:14px;padding:1.25rem;}
+.close{float:right;font-size:1.5rem;cursor:pointer;color:var(--pink);background:none;border:none;}
+form input,form textarea{width:100%;margin:.5rem 0;padding:.65rem;border:1px solid #ddd;border-radius:10px;}
+footer{background:#fff;border-top:1px solid #f0cadd;text-align:center;padding:1.25rem;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+<div class="wrap header-row">
+<div class="brand">
+<h1 id="brandText">Future Stars</h1>
+<p id="tagline">We Learn, We Grow, We Shine</p>
+</div>
+<nav>
+<a href="#services">What We Offer</a>
+<a href="#" onclick="openModal('tutors');return false;">Choose a Tutor</a>
+<a href="#" onclick="openModal('studentForm');return false;">Apply (Parent/Student)</a>
+<a href="#" onclick="openModal('teacherForm');return false;">Apply (Teacher)</a>
+<a href="#" onclick="openModal('admin');return false;">Admin</a>
+<select id="langSwitch">
+<option value="en">English</option>
+<option value="fr">Français</option>
+</select>
+</nav>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="hero wrap">
+<div>
+<h2 id="heroTitle">We Learn, We Grow, We Shine</h2>
+<p id="heroTag">Online lessons for ages 3–18 in English, French, Chinese, and Spanish.</p>
+<button class="btn" onclick="startLesson('Demo Tutor')">🎓 Book Demo Lesson</button>
+</div>
+<img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?q=80&w=1600&auto=format&fit=crop" alt="Students in classroom"/>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="wrap">
+<h3>What We Offer</h3>
+<div class="cards">
+<div class="card"><h4>1:1 & Small Groups</h4><p>Personalized classes for kids 3–18.</p></div>
+<div class="card"><h4>Language Tracks</h4><p>English, French, Chinese, Spanish.</p></div>
+<div class="card"><h4>Qualified Tutors</h4><p>Certified teachers, demo lessons, CFA rates.</p></div>
+</div>
+</section>
+
+<!-- TUTORS -->
+<div id="tutors" class="modal"><div class="modal-content">
+<button class="close" aria-label="Close" onclick="closeModal('tutors')">&times;</button>
+<h3>Choose a Tutor</h3>
+<p class="hint">All prices in CFA. Click 🎓 to book a demo lesson or 📹 to start a full lesson.</p>
+<div id="tutorList">Loading tutors…</div>
+</div></div>
+
+<!-- TEACHER FORM -->
+<div id="teacherForm" class="modal"><div class="modal-content">
+<button class="close" onclick="closeModal('teacherForm')">&times;</button>
+<h3>Teacher Application</h3>
+<form action="https://formspree.io/f/xyznwojj" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="_subject" value="New Teacher Application - Future Stars">
+<input type="hidden" name="_redirect" value="thanks.html">
+
+<input type="text" name="full_name" placeholder="Full Name" required>
+<input type="email" name="email" placeholder="Email" required>
+<input type="text" name="subjects" placeholder="Subjects">
+<input type="file" name="photo" accept="image/*" required>
+<input type="file" name="video" accept="video/*">
+<input type="file" name="certificate" accept=".pdf,.doc,.docx,.jpg,.png">
+<input type="checkbox" required> I accept that payments are processed with commission before Wave payout.
+<button class="btn" type="submit">Submit</button>
+</form>
+</div></div>
+
+<!-- PARENT FORM -->
+<div id="studentForm" class="modal"><div class="modal-content">
+<button class="close" onclick="closeModal('studentForm')">&times;</button>
+<h3>Parent/Student Application</h3>
+<form action="https://formspree.io/f/mnngdwva" method="POST">
+<input type="hidden" name="_subject" value="New Parent/Student Application - Future Stars">
+<input type="hidden" name="_redirect" value="thanks.html">
+
+<input type="text" name="learner_name" placeholder="Learner Name" required>
+<input type="number" name="age" placeholder="Age">
+<textarea name="goals" placeholder="Goals"></textarea>
+<button class="btn" type="submit">Submit</button>
+</form>
+</div></div>
+
+<!-- ADMIN -->
+<div id="admin" class="modal"><div class="modal-content">
+<button class="close" onclick="closeModal('admin')">&times;</button>
+<h3>Admin Space</h3>
+<p>📋 Review applications (Formspree Dashboard)</p>
+<p>📅 Manage tutor schedules</p>
+<p>💬 Chat with parents & teachers</p>
+</div></div>
+
+<!-- CHAT -->
+<div id="chatBox" class="modal"><div class="modal-content" style="max-width:500px;">
+<button class="close" onclick="closeModal('chatBox')">&times;</button>
+<h3 id="chatTitle">Chat</h3>
+<div id="chatMessages" style="height:250px;overflow:auto;border:1px solid #ccc;padding:10px;margin:10px 0;"></div>
+<input id="chatInput" placeholder="Type..."><button onclick="sendMessage()" class="btn">Send</button>
+</div></div>
+
+<!-- LESSON -->
+<div id="lessonModal" class="modal"><div class="modal-content">
+<button class="close" onclick="stopLesson()">&times;</button>
+<h3 id="lessonTitle">Lesson Room</h3>
+<div id="jitsiContainer" style="height:600px;"></div>
+</div></div>
+
+<footer><p>© 2025 Future Stars</p></footer>
+
+<script src="https://meet.jit.si/external_api.js"></script>
+<script src="assets/app.js"></script>
+
+<script>
+// Modal helpers
+function openModal(id){document.getElementById(id).style.display='block';}
+function closeModal(id){document.getElementById(id).style.display='none';}
+
+// Chat
+function startChat(tutorName){
+openModal("chatBox");
+document.getElementById("chatTitle").innerText = "Chat with " + tutorName;
+}
+function sendMessage(){
+const input=document.getElementById('chatInput');const box=document.getElementById('chatMessages');
+if(input.value.trim()){box.innerHTML+=`<p>You: ${input.value}</p>`;input.value="";box.scrollTop=box.scrollHeight;}
+}
+
+// Jitsi
+let jitsiApi=null;
+function startLesson(tutor){
+openModal('lessonModal');
+const room="FutureStars_"+Date.now();
+jitsiApi=new JitsiMeetExternalAPI("meet.jit.si",{roomName:room,parentNode:document.getElementById("jitsiContainer"),userInfo:{displayName:"Parent"}});
+document.getElementById('lessonTitle').innerText="Lesson with "+tutor;
+}
+function stopLesson(){if(jitsiApi)jitsiApi.dispose();closeModal('lessonModal');}
+
+// Translator
+const translations={
+fr:{brand:"Étoiles du Futur",tag:"Nous apprenons, grandissons et brillons",hero:"Nous apprenons, nous grandissons, nous brillons"},
+en:{brand:"Future Stars",tag:"We Learn, We Grow, We Shine",hero:"We Learn, We Grow, We Shine"}
+};
+document.getElementById("langSwitch").addEventListener("change",e=>{
+const l=e.target.value;
+document.getElementById("brandText").innerText=translations[l].brand;
+document.getElementById("tagline").innerText=translations[l].tag;
+document.getElementById("heroTitle").innerText=translations[l].hero;
+});
+</script>
+</body>
+</html>
